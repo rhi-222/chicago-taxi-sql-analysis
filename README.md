@@ -1,4 +1,4 @@
-# Analyzing Ride-Sharing Trends in Chicago: SQL & Data Collection Project
+# Ride-Sharing Trends in Chicago: SQL & Data Collection Project
 
 ## Table of Contents
 - [Overview](#overview)
@@ -6,92 +6,84 @@
 - [Dataset](#dataset)
 - [Exploratory Data Analysis (EDA)](#exploratory-data-analysis-eda)
 - [Hypothesis Testing](#hypothesis-testing)
-- [Key Insights & Business Impact](#key-insights--business-impact)
-- [Next Steps & Improvements](#next-steps--improvements)
+- [Results & Key Insights](#results--key-insights)
+- [Next Steps & Potential Improvements](#next-steps--potential-improvements)
 - [How to Use](#how-to-use)
 - [Connect With Me](#connect-with-me)
 
 ---
 
 ## Overview
-This project analyzes **ride-sharing data in Chicago** using **SQL queries and Python-based data analysis**. The objective is to identify trends in taxi usage, determine the impact of weather on ride frequency, and provide insights for **Zuber**, a new ride-sharing company entering the market.
+This project analyzes **Chicago taxi ride data** and **weather conditions** to uncover trends in ride frequency, company performance, and external factors influencing ride durations. The analysis includes SQL-based data retrieval, hypothesis testing, and visualization.
 
 ## Business Problem
-Zuber wants to understand:
-- **Passenger preferences** (popular routes, frequent taxi companies)
-- **Competitive landscape** (which taxi companies dominate the market)
-- **Weather impact** (does bad weather affect ride duration and frequency?)
+Zuber, a new ride-sharing startup, is looking to gain insights from **Chicago taxi ride data** to understand:
+- **Passenger preferences & behavior**
+- **Impact of weather conditions on ride frequency**
+- **Top-performing taxi companies and neighborhoods for drop-offs**
+- **Duration differences in rides to O'Hare on rainy vs. clear Saturdays**
 
-By leveraging **SQL** and **Python**, we extract insights that can **inform business decisions** and **optimize ride-sharing services**.
-
----
+By leveraging SQL queries and statistical analysis, the study provides **actionable insights** to optimize ride allocation strategies.
 
 ## Dataset
-The project uses a **relational database** containing four key tables:
+The analysis utilizes a **relational database** consisting of:
+- **neighborhoods**: Neighborhood ID & names
+- **cabs**: Taxi companies and vehicle details
+- **trips**: Ride start times, end times, distance, duration, pickup & drop-off locations
+- **weather_records**: Hourly temperature and weather descriptions
 
-- **neighborhoods** – Chicago neighborhood names & IDs.
-- **cabs** – Taxi company details and vehicle information.
-- **trips** – Ride details (pickup/dropoff locations, duration, timestamps).
-- **weather_records** – Hourly weather conditions (temperature, descriptions).
-
-Additionally, **three extracted datasets** were analyzed in Python:
-1. `project_sql_result_01.csv` – Taxi companies & ride counts (Nov 15-16, 2017).
-2. `project_sql_result_04.csv` – Average trip counts per neighborhood.
-3. `project_sql_result_07.csv` – Rides from Loop to O’Hare & weather impact.
-
-All datasets are stored in the **`data/`** folder for easy access.
+Additionally, SQL queries were executed to extract structured datasets for deeper analysis in Python:
+- `project_sql_result_01.csv`: Taxi companies & ride counts for November 15-16, 2017.
+- `project_sql_result_04.csv`: Drop-off locations & average rides in November 2017.
+- `project_sql_result_07.csv`: Rides from the **Loop** to **O'Hare Airport**, categorized by weather conditions.
 
 ---
 
 ## Exploratory Data Analysis (EDA)
-### **Key Findings**
-- **Most Active Taxi Companies:**  
-  - **Flash Cab** and **Taxi Affiliation Services** had the highest ride counts.
-  - Companies with "Yellow" or "Blue" in their names had significant market share.
+### **Taxi Company Ride Analysis**
+- **Flash Cab & Taxi Affiliation Services** were the dominant taxi companies.
+- "Yellow" and "Blue" branded companies had a strong presence.
+- The majority of rides were completed by a few major taxi firms.
 
-- **Popular Drop-off Locations:**  
-  - The top 10 neighborhoods for drop-offs were identified.
-  - Downtown and airport locations dominated ride activity.
+#### **Top Taxi Companies by Rides**
+<img src="images/taxi_company_rides.png" alt="Taxi Company Rides" width="600">
 
-- **Weather Impact on Ride Counts:**  
-  - Rain and storms led to **fluctuations in ride demand**.
-  - Certain taxi companies experienced **higher demand during bad weather**.
+### **Drop-off Location Analysis**
+- **The Loop, River North, and Streeterville** had the **highest number of drop-offs**.
+- These areas correspond to Chicago's **business and nightlife districts**.
+
+#### **Top 10 Drop-off Neighborhoods**
+<img src="images/top_neighborhoods.png" alt="Top Neighborhoods" width="600">
 
 ---
 
 ## Hypothesis Testing
-### **Hypothesis:**  
-_"The average duration of rides from the Loop to O’Hare International Airport changes on rainy Saturdays."_
+**Hypothesis:**  
+*"The average duration of rides from the Loop to O'Hare International Airport changes on rainy Saturdays."*
 
-- **Null Hypothesis (H₀):** Weather does not affect ride duration.
-- **Alternative Hypothesis (H₁):** Ride duration is affected by weather.
-
-**Method:**  
-- Performed **statistical testing** (t-test) on ride durations during "Good" and "Bad" weather conditions.
-- Used **Python's SciPy library** to calculate **p-values** and determine statistical significance.
-
-**Results:**  
-- The test **found no strong evidence** that rain significantly impacts ride duration.
-- However, variability in travel times suggests other external factors (traffic, demand) may play a role.
+- **Method:** Two-sample t-test comparing ride durations on rainy vs. clear Saturdays.
+- **Significance Level (α):** 0.05
+- **Results:** No statistically significant difference was found, indicating **weather did not strongly impact ride duration**.
 
 ---
 
-## Key Insights & Business Impact
-- **Taxi Market Concentration:** A few companies dominate the ride-sharing space.
-- **Weather Considerations:** While rain doesn’t **drastically** affect ride duration, it **may impact ride availability**.
-- **Neighborhood Hotspots:** Business districts and airports are **prime locations** for ride demand.
+## Results & Key Insights
+- **Flash Cab and Taxi Affiliation Services dominate the Chicago market.**
+- **The Loop, River North, and Streeterville** are prime ride destinations.
+- **Weather conditions had minimal impact on ride duration** from the Loop to O'Hare.
 
 ### **Business Recommendations**
-- **Strategic Partnerships** – Partner with top taxi companies for competitive positioning.  
-- **Dynamic Pricing Models** – Adjust pricing based on **weather conditions** and **peak demand hours**.  
-- **Focus on High-Demand Areas** – Prioritize **airport routes** and **downtown locations** for expansion.  
+- **Optimize ride supply** in high-demand areas like River North & Streeterville.
+- **Consider strategic partnerships** with major taxi firms to increase market penetration.
+- **Further investigate service quality issues** beyond weather-related delays.
 
 ---
 
-## Next Steps & Improvements
-- **Deeper Analysis of Ride Duration Trends:** Explore the impact of **traffic congestion** on ride duration.  
-- **Expand Dataset Scope:** Incorporate **rideshare data from Lyft/Uber** for a broader comparison.  
-- **Develop a Real-Time Ride Forecasting Model:** Predict demand spikes based on **weather & location trends**.  
+## Next Steps & Potential Improvements
+- **Incorporate real-time ride data** to track seasonal fluctuations.
+- **Analyze fare pricing strategies** and their impact on ride demand.
+- **Evaluate traffic congestion** as a potential factor affecting ride durations.
+
 
 ---
 
